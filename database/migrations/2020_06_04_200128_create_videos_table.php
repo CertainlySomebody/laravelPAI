@@ -20,6 +20,8 @@ class CreateVideosTable extends Migration
             $table->date('rok_produkcji');
             $table->longText('opis_fabuly');
             $table->string('image_dir');
+            $table->integer('category_connection');
+            $table->string('slug');
             $table->float('cena', 4, 2);
         });
     }

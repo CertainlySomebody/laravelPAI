@@ -21,7 +21,7 @@
         <main id="pageMain">
             <div class="pageWrap">
                 <div class="container">
-                    @include('parts.indexMain')
+                    
                 </div>
             </div>
         </main>

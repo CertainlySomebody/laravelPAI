@@ -1,1 +1,194 @@
-//
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+@import 'variables.scss';
+
+body {
+    background-color:#000000;
+    color:$white;
+    font-family:$font-Nunito;
+}
+
+h1 {
+    color:$white;
+}
+
+ul {
+    list-style-type:none;
+}
+
+a {
+    color:white;
+    text-decoration:none;
+}
+
+button {
+    text-decoration:none;
+    border:0;
+    background-color:transparent;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+button:focus {
+    outline:0;
+}
+
+input {
+    background-color: black;
+    border:1px solid #ffffff;
+    padding:10px;
+    color:white;
+}
+input:focus {
+    outline:0;
+}
+
+.container {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+// header
+
+#pageHeader {
+    position:relative;
+}
+
+.logoWrap {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    z-index:100;
+    overflow:hidden;
+    background-color:#000000;
+}
+
+.logoWrap img {
+    max-width:150px;
+}
+
+
+
+.categoriesWrap {
+    display:flex;
+    justify-content:center;
+    z-index:100;
+    overflow:hidden;
+    background-color:#000000;
+}
+.categoriesItems {
+    width:100%;
+    display:flex;
+    justify-content:center;
+    transition:0.5s all;
+    margin-left:-100%;
+    .categories {
+        display:flex;
+        margin:0;
+        padding:0;
+        li {
+            height:54px;
+            padding:0 6px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+    }
+}
+.categoriesItems.active {
+    margin-left:0;
+    transition:0.5s all;
+}
+.buttonDropdown.active {
+
+}
+
+.basketWrap {
+    display:flex;
+    padding:0;
+    li {
+        padding:0 6px;
+    }
+}
+
+// login page
+
+
+.loginWrapper {
+    display:flex;
+    justify-content:center;
+    form {
+        display:flex;
+        flex-direction:column;
+    }
+}
+
+// main content
+
+.videosWrapper {
+    display:flex;
+    flex-wrap:wrap;
+    .videosItem {
+        position:relative;
+        width: calc(100% / 4);
+        min-width: 278px;
+        height:165px;
+        cursor:pointer;
+        img {
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+        .itemTitle {
+            position:absolute;
+            width:100%;
+            height:100%;
+            top:0;
+            left:0;
+            display:flex;
+            align-items:flex-end;
+            opacity:0;
+            transition:0.5s all;
+            background: linear-gradient(transparent, grey);
+            p {
+                padding:0 10px;
+            }
+        }
+        .itemTitle:hover {
+            opacity:1;
+            transition:0.5s all;
+        }
+    } 
+}
+
+// media
+
+@media #{$phone-Only} {
+    .container {
+        width:100%;
+    }
+}
+
+@media #{$tablet-Portrait-up} {
+    .container {
+        width:100%;
+    }
+}
+
+@media #{$tablet-landscape-up} {
+    .container {
+        width:100%;
+    }
+}
+
+@media #{$desktop-Up} {
+    .container {
+        width:1200px;
+    }
+}
+
+@media #{$big-desktop-Up} {
+    .container {
+        width:1200px;
+    }
+}

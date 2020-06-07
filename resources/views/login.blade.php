@@ -21,7 +21,14 @@
         <main id="pageMain">
             <div class="pageWrap">
                 <div class="container">
-                    @include('parts.indexMain')
+                    <div class="loginWrapper">
+                        <form action="/login/processLogin" method="post">
+                            @csrf
+                            Email: <input type="email" name="email">
+                            Hasło: <input type="password" name="password">
+                            <input type="submit" value="Zaloguj">
+                        </form>
+                    </div>
                 </div>
             </div>
         </main>
