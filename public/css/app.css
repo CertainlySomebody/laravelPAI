@@ -86,7 +86,7 @@ input:focus {
 }
 
 .categoriesItems .categories {
-  display: flex;
+  display: none;
   margin: 0;
   padding: 0;
 }
@@ -107,6 +107,10 @@ input:focus {
   height: 54px;
   opacity: 1;
   transition: 0.5s all;
+}
+
+.categoriesItems.active .categories {
+  display: flex;
 }
 
 .basketWrap {
@@ -168,6 +172,23 @@ input:focus {
 .videosWrapper .videosItem .itemTitle:hover {
   opacity: 1;
   transition: 0.5s all;
+}
+
+.videoWrapper {
+  display: flex;
+  margin-top: 5rem;
+}
+
+.videoWrapper .imagesSide {
+  width: 50%;
+}
+
+.videoWrapper .imagesSide img {
+  width: 100%;
+}
+
+.videoWrapper .descSide {
+  width: 50%;
 }
 
 @media (max-width: 599px) {

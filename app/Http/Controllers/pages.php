@@ -39,10 +39,8 @@ class pages extends Controller
         }
     }
 
-    function logout() {
-        Auth::logout();
-        Cache::flush();
-        return redirect('index');
+    function logout(Request $request) {
+        return redirect('login')->with(Auth::logout());
     }
 
     function singleVideo(Request $request, $slug_one, $videos) {
@@ -69,6 +67,7 @@ class pages extends Controller
             $getVideos = videos::where('category_connection', $checkCat->video_connection)->get();
             return view('categoryView', ['category' => $category, 'checkCat' => $checkCat, 'getVideos' => $getVideos, 'slug' => $slug_one]);
         }else if($slug_one == 'userPanel'){
+            //dd(Auth::user());
             return view('userPanel', ['category' => $category]);
         }else if($slug_one == 'cart') {
             return view('cart', ['category' => $category]);

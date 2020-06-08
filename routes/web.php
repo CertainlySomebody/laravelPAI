@@ -20,12 +20,11 @@ Route::post('/login/processLogin', 'pages@checkLogin')->name('checkLogin');
 
 //Route::get('parts.indexMain', 'pages@getAllVideos');
 
+
+Route::get('/logout', 'pages@logout')->name('logout');
+
 Route::get('/{slug_one}/{slug_two}', 'pages@singleVideo');
 Route::get('/{slug_one}', 'pages@handlePages');
 
 Route::get('/cart', 'pages@handlePages')->name('cart');
 Route::get('/userPanel', 'pages@handlePages')->name('userPanel');
-
-Route::group(array ('before' => 'auth'), function() {
-    Route::get('/login/logout', 'pages@logout');
-});

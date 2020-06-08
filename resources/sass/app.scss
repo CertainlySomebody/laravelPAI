@@ -90,7 +90,7 @@ input:focus {
     padding:0;
     opacity:0;
     .categories {
-        display:flex;
+        display:none;
         margin:0;
         padding:0;
         li {
@@ -109,6 +109,9 @@ input:focus {
     height:54px;
     opacity:1;
     transition:0.5s all;
+    .categories {
+        display:flex;
+    }
 }
 .buttonDropdown.active {
 
@@ -170,6 +173,22 @@ input:focus {
             transition:0.5s all;
         }
     } 
+}
+
+// single Video
+
+.videoWrapper {
+    display:flex;
+    margin-top:5rem;
+    .imagesSide {
+        width:50%;
+        img {
+            width:100%;
+        }
+    }
+    .descSide {
+        width:50%;
+    }
 }
 
 // media
