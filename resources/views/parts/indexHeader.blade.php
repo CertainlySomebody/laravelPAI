@@ -13,9 +13,16 @@
 
     <ul class="basketWrap">
         <li class="logIn">
-            <a href="{{ route('login') }}">
-                Zaloguj się
-            </a>
+            @guest
+                <a href="{{ route('login') }}">
+                    Zaloguj się
+                </a>
+            @endguest
+            @auth
+                <a href="{{ route('userPanel') }}">
+                    Panel
+                </a>
+            @endauth
         </li>
         <li class="basketWrapper">
             <a href="{{ route('cart') }}">
@@ -28,8 +35,13 @@
     <ul class="categories">
         @php
             foreach ($category as $value) {
-                echo '<li>';
-                    echo '<a href="'.$value->slug.'">'. $value->category_name .'</a>';
+                $catActive = '';
+                if(!empty($slug) && isset($slug)) {
+                    $catActive = ($slug == $value->slug) ? 'active' : '';
+                }
+                
+                echo '<li class="'.$catActive.'">';
+                    echo '<a href="/'.$value->slug.'">'. $value->category_name .'</a>';
                 echo '</li>';
             }   
         @endphp

@@ -14,10 +14,10 @@ class pages extends Controller
         $category = category::all();
         $slug = $request->path();
         $videos = videos::all()->take(24);
-        //dd($slug);
         $redirect = ($slug != '/') ? $slug : 'index';
         $getVideos = ($slug == '/') ?  $videos : '';
             
+        
         return view($redirect, ['category' => $category, 'videos' => $getVideos]);
     }
 
@@ -33,29 +33,52 @@ class pages extends Controller
         );
 
         if (Auth::attempt($user_data)) {
-            return redirect('login/successLogin');
+            return redirect()->route('userPanel');
         }else{
             return back()->with('error', 'Nieprawidłowy login lub haslo');
         }
     }
 
-    function successLogin() {
-        return view('userPanel');
-    }
-
     function logout() {
         Auth::logout();
         Cache::flush();
-        return redirect('main');
+        return redirect('index');
     }
 
-    function singleVideo(Request $request, $category_slug, $videos) {
+    function singleVideo(Request $request, $slug_one, $videos) {
         $category = category::all();
-        return view('singleVideo', ['category' => $category]);
+        $checkCat = category::where('slug', $slug_one)->get()->first();
+        if(!empty($checkCat)) {
+            $getSingle = videos::where('slug', $videos)->get()->first();
+            
+            if(!empty($getSingle)) {
+                return view('singleVideo', ['category' => $category, 'checkCat' => $checkCat, 'getSingle' => $getSingle, 'slug' => $slug_one]);
+            }else{
+                return view('404error');
+            }
+        }else{
+            return view('404error');
+        }
     }
 
-    function categoryView(Request $request) {
+    function handlePages(Request $request, $slug_one) {
         $category = category::all();
-        return view('categoryView', ['category' => $category]);
+        $checkCat = category::where('slug', $slug_one)->get()->first();
+        
+        if(!empty($checkCat)) {
+            $getVideos = videos::where('category_connection', $checkCat->video_connection)->get();
+            return view('categoryView', ['category' => $category, 'checkCat' => $checkCat, 'getVideos' => $getVideos, 'slug' => $slug_one]);
+        }else if($slug_one == 'userPanel'){
+            return view('userPanel', ['category' => $category]);
+        }else if($slug_one == 'cart') {
+            return view('cart', ['category' => $category]);
+        }else{
+            if(view()->exists($slug_one)) {
+                return view($slug_one, ['category' => $category]);
+            }else{
+                return view('404error', ['category' => $category]);
+            }
+        }
     }
+
 }

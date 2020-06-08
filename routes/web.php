@@ -15,19 +15,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'pages@show')->name('index');
 Route::get('/login', 'pages@show')->name('login');
-Route::post('/login/processLogin', 'pages@checkLogin');
-Route::get('/login/successlogin', 'pages@successLogin');
-Route::get('/login/logout', 'pages@logout');
+Route::post('/login/processLogin', 'pages@checkLogin')->name('checkLogin');
 
-// route to single video
-
-// route to specified category with videos
-
-Route::get('/cart', function() {
-    return view('cart');
-})->name('cart');
 
 //Route::get('parts.indexMain', 'pages@getAllVideos');
 
-Route::get('/{category_slug}/{name}', 'pages@singleVideo');
-Route::get('/{category_slug}', 'pages@categoryView');
+Route::get('/{slug_one}/{slug_two}', 'pages@singleVideo');
+Route::get('/{slug_one}', 'pages@handlePages');
+
+Route::get('/cart', 'pages@handlePages')->name('cart');
+Route::get('/userPanel', 'pages@handlePages')->name('userPanel');
+
+Route::group(array ('before' => 'auth'), function() {
+    Route::get('/login/logout', 'pages@logout');
+});

@@ -19,6 +19,8 @@ ul {
 a {
     color:white;
     text-decoration:none;
+    font-weight:bold;
+    text-transform:uppercase;
 }
 
 button {
@@ -28,7 +30,10 @@ button {
     color:white;
     font-size:16px;
     cursor:pointer;
+    font-weight:bold;
+    text-transform:uppercase;
 }
+
 button:focus {
     outline:0;
 }
@@ -79,9 +84,11 @@ input:focus {
 .categoriesItems {
     width:100%;
     display:flex;
+    height:0;
     justify-content:center;
     transition:0.5s all;
-    margin-left:-100%;
+    padding:0;
+    opacity:0;
     .categories {
         display:flex;
         margin:0;
@@ -93,10 +100,14 @@ input:focus {
             align-items:center;
             justify-content:center;
         }
+        li.active {
+            border-bottom:1px solid white;
+        }
     }
 }
 .categoriesItems.active {
-    margin-left:0;
+    height:54px;
+    opacity:1;
     transition:0.5s all;
 }
 .buttonDropdown.active {

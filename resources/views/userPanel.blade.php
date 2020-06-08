@@ -21,14 +21,7 @@
         <main id="pageMain">
             <div class="pageWrap">
                 <div class="container">
-                    <div class="loginWrapper">
-                        <form action="{{route('checkLogin')}}" method="post">
-                            @csrf
-                            Email: <input type="email" name="email">
-                            Hasło: <input type="password" name="password">
-                            <input type="submit" value="Zaloguj">
-                        </form>
-                    </div>
+                    @include('parts.admin')
                 </div>
             </div>
         </main>
