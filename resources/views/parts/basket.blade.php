@@ -37,11 +37,19 @@
         </tbody>
     </table>
     <div class="totalPrice">
+        @if (!empty($totalprice))
         <p><h2>Ostateczna cena: {{$totalprice}}zł</h2></p>
+        @endif
     </div>
     @php
         if(!empty(session('cart'))) {
-            echo '<a href="" class="orderButton">Złóż zamówienie</a>';
+            echo '<a href="'.route('order').'" class="orderButton">Złóż zamówienie</a>';
+        }
+        if(!empty(session('error'))) {
+        $error = session('error');
+            echo '<script>';
+            echo 'alert("'.$error.'");';
+            echo '</script>';
         }
 
         //dd(session('cart'));

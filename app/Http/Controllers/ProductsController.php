@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\videos;
+use App\order;
 
 class ProductsController extends Controller
 {
@@ -65,7 +66,26 @@ class ProductsController extends Controller
     }
 
     public function orderVideos(Request $request) {
+        if(!empty(session('cart'))) {
+            $currentOrder = session('cart');
+            $totalValue = 0;
+            $desc = '';
+            foreach($currentOrder as $order_item) {
+                //dd($order_item);
+                $totalValue += $order_item['cena'];
+                $desc .= $order_item['name'].', ';
+            }
+            $newOrder = new order;
+            $newOrder->cena = $totalValue;
+            $newOrder->description = $desc;
 
+            $newOrder->save();
+
+            session()->forget('cart');
+
+            return redirect()->back()->with('error', 'Złożono zamówienie!');
+
+        }
     }
 
 

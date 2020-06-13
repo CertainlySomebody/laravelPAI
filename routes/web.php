@@ -28,6 +28,7 @@ Route::get('/userPanel', 'pages@handlePages')->name('userPanel');
 
 Route::get('/add-to-cart/{id}', 'ProductsController@addToCart');
 Route::get('/remove-from-cart/{id}', 'ProductsController@removeFromCart');
+Route::get('/order', 'ProductsController@orderVideos')->name('order');
 
 Route::get('/{slug_one}/{slug_two}', 'pages@singleVideo');
 Route::get('/{slug_one}', 'pages@handlePages');
