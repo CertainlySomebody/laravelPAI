@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
-@import 'variables.scss';
+@import '_variables.scss';
+
+$white: #ffffff;
 
 body {
-    background-color:#000000;
+    background-color:#282828;
     color:$white;
     font-family:$font-Nunito;
+    margin:0;
 }
 
 h1 {
@@ -19,8 +22,6 @@ ul {
 a {
     color:white;
     text-decoration:none;
-    font-weight:bold;
-    text-transform:uppercase;
 }
 
 button {
@@ -30,8 +31,7 @@ button {
     color:white;
     font-size:16px;
     cursor:pointer;
-    font-weight:bold;
-    text-transform:uppercase;
+    font-family:$font-Nunito;
 }
 
 button:focus {
@@ -46,6 +46,10 @@ input {
 }
 input:focus {
     outline:0;
+}
+
+.alert.red {
+    color:red;
 }
 
 .container {
@@ -65,7 +69,7 @@ input:focus {
     align-items:center;
     z-index:100;
     overflow:hidden;
-    background-color:#000000;
+    background-color:#282828;
 }
 
 .logoWrap img {
@@ -79,7 +83,7 @@ input:focus {
     justify-content:center;
     z-index:100;
     overflow:hidden;
-    background-color:#000000;
+    background-color:#282828;
 }
 .categoriesItems {
     width:100%;
@@ -113,9 +117,13 @@ input:focus {
         display:flex;
     }
 }
-.buttonDropdown.active {
 
+.categoryName {
+    padding:1rem;
+    text-align:center;
 }
+
+// basket - koszyk
 
 .basketWrap {
     display:flex;
@@ -124,6 +132,26 @@ input:focus {
         padding:0 6px;
     }
 }
+.cartWrapper {
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+    align-items:center;
+    padding:2rem;
+}
+
+.orderButton {
+    padding:0.5rem;
+    border:1px solid #ffffff;
+    border-radius:1rem;
+    transition:0.5s all;
+}
+.orderButton:hover {
+    background-color:white;
+    color:#000000;
+    transition:0.5s all;
+}
+
 
 // login page
 
@@ -131,6 +159,9 @@ input:focus {
 .loginWrapper {
     display:flex;
     justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    height:100%;
     form {
         display:flex;
         flex-direction:column;
@@ -139,9 +170,29 @@ input:focus {
 
 // main content
 
+.mainContent {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:1rem;
+}
+
+.pageWrap {
+    .container {
+        min-height:calc(100vh - 204px);
+        background-color:#000000;
+        border:0;
+    }
+}
+
 .videosWrapper {
     display:flex;
     flex-wrap:wrap;
+    justify-content:center;
+    .wrapperCenter {
+        display:flex;
+        flex-wrap:wrap;
+    }
     .videosItem {
         position:relative;
         width: calc(100% / 4);
@@ -179,7 +230,7 @@ input:focus {
 
 .videoWrapper {
     display:flex;
-    margin-top:5rem;
+    padding:2rem;
     .imagesSide {
         width:50%;
         img {
@@ -189,6 +240,53 @@ input:focus {
     .descSide {
         width:50%;
     }
+    .descWrapper {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        a {
+            border:1px solid white;
+            padding:0.5rem;
+            border-radius: 1rem;
+            transition:0.5s all ease-in-out;
+        }
+        a:hover {
+            background-color: #ffffff;
+            color:#000000;
+            transition:0.5s all ease-in-out;
+        }
+    }
+}
+
+.descWrapper p {
+    text-align:center;
+}
+
+// cart
+
+#cartContent {
+    width:100%;
+    padding:0 1rem;
+    img {
+        max-width:300px;
+    }
+}
+.myCart {
+    text-align:center;
+    padding-top:1rem;
+}
+
+.emptyBasket {
+    text-align:center;
+}
+
+// Footer
+
+.footerWrapper {
+    padding:2rem;
+    text-align:center;
+    background-color:#ffffff;
+    color:#000000;
 }
 
 // media
@@ -197,12 +295,23 @@ input:focus {
     .container {
         width:100%;
     }
+    .videoWrapper {
+        flex-direction:column;
+        .imagesside {
+            width:100%;
+        }
+        .descSide {
+            width:100%;
+        }
+    }
+
 }
 
 @media #{$tablet-Portrait-up} {
     .container {
         width:100%;
     }
+
 }
 
 @media #{$tablet-landscape-up} {

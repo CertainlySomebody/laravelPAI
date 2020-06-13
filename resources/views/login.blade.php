@@ -28,7 +28,13 @@
                             Hasło: <input type="password" name="password">
                             <input type="submit" value="Zaloguj">
                         </form>
-                        Nie masz konta? <a href="{{ route('register') }}">Zarejestruj się</a>
+                        Nie masz konta? <a href="{{ route('register') }}"><u>Zarejestruj się</u></a>
+
+                        @if (Session::has('error'))
+                            <div class="alert red">
+                                {{ Session::get('error') }}
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

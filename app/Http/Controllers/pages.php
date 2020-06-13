@@ -51,11 +51,7 @@ class pages extends Controller
             
             if(!empty($getSingle)) {
                 return view('singleVideo', ['category' => $category, 'checkCat' => $checkCat, 'getSingle' => $getSingle, 'slug' => $slug_one]);
-            }else{
-                return view('404error');
             }
-        }else{
-            return view('404error');
         }
     }
 
@@ -74,10 +70,12 @@ class pages extends Controller
         }else{
             if(view()->exists($slug_one)) {
                 return view($slug_one, ['category' => $category]);
-            }else{
-                return view('404error', ['category' => $category]);
             }
         }
+    }
+
+    function register(Request $request) {
+        
     }
 
 }
