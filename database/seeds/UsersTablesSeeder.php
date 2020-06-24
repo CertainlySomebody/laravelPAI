@@ -19,6 +19,7 @@ class UsersTablesSeeder extends Seeder
             'email' => 'dominik.bak@gmail.com',
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
+            'type' => 'admin'
         ]);
     }
 }

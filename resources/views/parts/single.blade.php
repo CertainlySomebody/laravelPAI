@@ -9,7 +9,12 @@
             <p><b>Rok Produkcji:</b> {{$getSingle->rok_produkcji}}</p>
             <p><b>Opis Fabuły:</b> {{$getSingle->opis_fabuly}}</p>
             <p><b>Cena:</b> {{$getSingle->cena}} zł</p>
-            <a href="{{ url('add-to-cart/'.$getSingle->id) }}">Kup teraz</a>
+            @auth
+                <a href="{{ url('add-to-cart/'.$getSingle->id) }}">Kup teraz</a>
+            @endauth
+            @guest
+                <p><a href="{{route('login')}}">Zaloguj się</a> aby zakupić!</p>    
+            @endguest
                 @if (Session::has('error'))
                     <div>
                         @php

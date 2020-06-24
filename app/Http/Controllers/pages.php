@@ -7,9 +7,11 @@ use App\videos;
 use App\category;
 use Validator;
 use Auth;
+use App\order;
 
 class pages extends Controller
 {
+    // standard page handling
     public function show(Request $request) {
         $category = category::all();
         $slug = $request->path();
@@ -20,7 +22,7 @@ class pages extends Controller
         
         return view($redirect, ['category' => $category, 'videos' => $getVideos]);
     }
-
+    // check login
     function checkLogin(Request $request) {
         $this->validate($request, [
             'email' => 'required|email',
@@ -39,10 +41,11 @@ class pages extends Controller
         }
     }
 
+    // logout function
     function logout(Request $request) {
         return redirect('login')->with(Auth::logout());
     }
-
+    // single video view handling
     function singleVideo(Request $request, $slug_one, $videos) {
         $category = category::all();
         $checkCat = category::where('slug', $slug_one)->get()->first();
@@ -54,7 +57,7 @@ class pages extends Controller
             }
         }
     }
-
+    // extended page handling
     function handlePages(Request $request, $slug_one) {
         $category = category::all();
         $checkCat = category::where('slug', $slug_one)->get()->first();
@@ -63,19 +66,32 @@ class pages extends Controller
             $getVideos = videos::where('category_connection', $checkCat->video_connection)->get();
             return view('categoryView', ['category' => $category, 'checkCat' => $checkCat, 'getVideos' => $getVideos, 'slug' => $slug_one]);
         }else if($slug_one == 'userPanel'){
-            //dd(Auth::user());
-            return view('userPanel', ['category' => $category]);
+            
+            if (!Auth::guest()) {
+                $getOrders = order::where('userId','=', Auth::user()->id)->get();
+                return view('userPanel', ['category' => $category, 'orders' => $getOrders]);
+            }else{
+                return redirect()->to('login');
+            }
+
         }else if($slug_one == 'cart') {
-            return view('cart', ['category' => $category]);
+
+            if (!Auth::guest()) {
+                return view('cart', ['category' => $category]);
+            }else{
+                return redirect()->to('login');
+            }
+        }else if($slug_one == 'register') {
+            return view('register', ['category' => $category]);
+
+        }else if($slug_one == 'removeVideo') {
+            $videos = videos::all();
+            return view('removeVideo', ['category' => $category, 'videos' => $videos]);
         }else{
             if(view()->exists($slug_one)) {
                 return view($slug_one, ['category' => $category]);
             }
         }
-    }
-
-    function register(Request $request) {
-        
     }
 
 }

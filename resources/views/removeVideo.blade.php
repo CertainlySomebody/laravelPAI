@@ -21,14 +21,18 @@
         <main id="pageMain">
             <div class="pageWrap">
                 <div class="container">
-                    <div class="registerWrapper">
-                        <h1>Register</h1>
-                        <form action="register" method="POST">
+                    <div class="removeVideoWrapper">
+                        <h1>Usuń Wideo</h1>
+                        <form action="processDelete" method="POST">
                             @csrf
-                            <input type="text" name="name" placeholder="type your name">
-                            <input type="email" name="email" placeholder="type your email">
-                            <input type="password" name="password" placeholder="type your password">
-                            <input type="submit" value="Rejestracja">
+                            <select name="id">
+                                @php
+                                    foreach($videos as $s_video) {
+                                        echo '<option value="'.$s_video->id.'">'.$s_video->tytul.'</option>';
+                                    }
+                                @endphp
+                            </select>
+                            <input type="submit" value="usuń">
                         </form>
                     </div>
                 </div>
